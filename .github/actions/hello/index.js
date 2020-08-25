@@ -2286,7 +2286,7 @@ const github = __webpack_require__(438)
 try {
   console.log('repo', github.context.payload.pull_request.url+'/files')
   fetch(github.context.payload.pull_request.url+'/files')
-    .then(response => response.json)
+    .then(response => response.json())
     .then(json => console.log(json))
 } catch (err) {
   console.error(err);
