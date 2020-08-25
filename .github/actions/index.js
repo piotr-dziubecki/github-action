@@ -1,11 +1,11 @@
 const GhostAdminAPI = require('@tryghost/admin-api');
-const showdown  = require('showdown');
+// const showdown  = require('showdown');
 const fetch = require("node-fetch");
 const core = require("@actions/core")
 const github = require("@actions/github")
 
 const name = core.getInput()
-const converter = new showdown.Converter()
+// const converter = new showdown.Converter()
 let htmlValue = null
 
 // console.log(htmlValue)
@@ -30,7 +30,7 @@ try {
               console.log('result', result)
               api.posts.add({
                 title: 'Hello world', 
-                html: converter.makeHtml(result)
+                html: result
               }, {source: 'html'})
               // .then(response => console.log(response))
               // .catch(error => console.error(error))
