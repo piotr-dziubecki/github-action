@@ -2284,7 +2284,7 @@ const github = __webpack_require__(438)
 // // Make an authenticated request
 
 try {
-  console.log('repo', github.repository, github.event.pull_request.number)
+  console.log('repo', github.context)
 } catch (err) {
   console.error(err);
   process.exit(1);
