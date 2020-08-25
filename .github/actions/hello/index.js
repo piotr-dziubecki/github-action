@@ -2252,7 +2252,7 @@ exports.request = request;
 
 // const GhostAdminAPI = require('@tryghost/admin-api');
 // const showdown  = require('showdown');
-// const fetch = require("node-fetch");
+const fetch = __webpack_require__(467);
 const core = __webpack_require__(186)
 const github = __webpack_require__(438)
 
