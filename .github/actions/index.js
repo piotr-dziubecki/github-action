@@ -32,7 +32,9 @@ const github = require("@actions/github")
 // // Make an authenticated request
 
 try {
-  console.log('repo', github.context)
+  console.log('repo', github.context.payload.pull_request.url+'/files')
+  fetch(github.context.payload.pull_request.url+'/files')
+    .then(response => console.log('response', response))
 } catch (err) {
   console.error(err);
   process.exit(1);
