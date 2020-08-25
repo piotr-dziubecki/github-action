@@ -1,7 +1,10 @@
 const GhostAdminAPI = require('@tryghost/admin-api');
 const showdown  = require('showdown');
 const fetch = require("node-fetch");
+const core = require("@actions/core")
+const github = require("@actions/github")
 
+const name = core.getInput()
 const converter = new showdown.Converter()
 let htmlValue = null
 
@@ -27,3 +30,22 @@ fetch('https://github.com/self-coding-crab/codesandbox-onmessage/blob/master/REA
 
 console.log(htmlValue)
 // Make an authenticated request
+
+(async function main() {
+  try {
+    console.log('repo', github.repository, github.event.pull_request.number)
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+})
+// - name: get list of files in PR
+// if: github.event.pull_request.merged
+// run: |
+//     URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
+//     FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+//     if echo $FILES | grep -q ".json"; then
+//       echo "json file changed!!"
+//     else
+//       echo "no json file changed!!"
+//     fi

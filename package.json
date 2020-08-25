@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/self-coding-crab/github-action#readme",
   "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
     "@tryghost/admin-api": "^1.3.1",
     "node-fetch": "^2.6.0",
     "showdown": "^1.9.1"
