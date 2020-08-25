@@ -1,4 +1,4 @@
 name: Update Ghost Posts
 runs:
   using: 'node12'
-  main: './dist'
+  main: '../../dist'
