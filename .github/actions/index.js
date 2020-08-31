@@ -1,11 +1,8 @@
 const GhostAdminAPI = require('@tryghost/admin-api');
-const showdown  = require('showdown');
 const fetch = require("node-fetch");
 const core = require("@actions/core")
 const github = require("@actions/github")
 
-const name = core.getInput()
-const converter = new showdown.Converter()
 let htmlValue = null
 
 // Configure the client
