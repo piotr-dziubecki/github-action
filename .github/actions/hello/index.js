@@ -2980,42 +2980,41 @@ const fetch = __webpack_require__(454);
 const core = __webpack_require__(470)
 const github = __webpack_require__(469)
 
+const name = core.getInput()
 const converter = new showdown.Converter()
 let htmlValue = null
 
-// console.log(htmlValue)
-// // Make an authenticated request
+// Configure the client
+const api = new GhostAdminAPI({
+  url: 'https://blog-pr.casperlabs.io',
+  // Admin API key goes here
+  key: '5f492151f94320000142e86f:3a504ff9996824e0e5311113afe686541380e20290b9b4acad61f1de7403a771',
+  version: 'v2'
+});
 
-try {
-  const api = new GhostAdminAPI({
-    url: 'http://localhost:2368',
-    // Admin API key goes here
-    key: '5f3e801b7d2ab73c67113ec2:f9a4c5835daacfb432ce34c62efd5baec5d009819c2d5badc5ab3962715fb5f4',
-    version: 'v2'
-  });
+fetch('https://github.com/self-coding-crab/codesandbox-onmessage/blob/master/README.md') 
+    .then(response => response.text())
+    .then(result => {
+      console.log('result', result)
+      api.posts.add({
+        title: 'Hello world', 
+        html: result
+      }, {source: 'html'})
+      // .then(response => console.log(response))
+      // .catch(error => console.error(error))
+    });
 
-  fetch(github.context.payload.pull_request.url+'/files')
-    .then(response => response.json())
-    .then(files => {
-      files.map(file => {
-        // Configure the client
-        fetch(file.raw_url) 
-            .then(response => response.text())
-            .then(result => {
-              console.log('result', result)
-              api.posts.add({
-                title: 'Hello world', 
-                html: converter.makeHtml(result)
-              }, {source: 'html'})
-              // .then(response => console.log(response))
-              // .catch(error => console.error(error))
-            });
-      })
-    })
-} catch (err) {
-  console.error(err);
-  process.exit(1);
-}
+console.log(htmlValue)
+// Make an authenticated request
+
+(async function main() {
+  try {
+    console.log('repo', github.repository, github.event.pull_request.number)
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+})
 // - name: get list of files in PR
 // if: github.event.pull_request.merged
 // run: |
